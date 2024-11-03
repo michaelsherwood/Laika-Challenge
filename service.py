@@ -29,6 +29,22 @@ def get_shotgrid_connection():
     return sg
 
 
+def get_schema(sg: Shotgun, entity_type: str):
+    """
+    Get the schema for an entity type
+
+    Args:
+        sg (Shotgun): An instance of the Shotgrid API
+        entity_type (str): The name of the entity type to get the schema for
+
+    Returns:
+        dict: The schema for the entity type
+    """
+    schema = sg.schema_field_read(entity_type)
+
+    return schema
+
+
 def get_sequences(sg: Shotgun, project_id: int):
     """
     Get all sequences for a project
@@ -53,8 +69,15 @@ if __name__ == "__main__":
 
     st = time.time()  # NOTE Remove for production
     sg = get_shotgrid_connection()
-    
+
     print(f"Connection time: {(time.time() - st) * 1000:.0f}ms")  # NOTE Remove for production
+
+    st = time.time()
+    schema = get_schema(sg, "Sequence")
+
+    print(f"Schema time: {(time.time() - st) * 1000:.0f}ms")
+    with open("data/schema.json", "w") as f:
+        json.dump(schema, f, indent=2, default=str)
 
     st = time.time()  # NOTE Remove for production
     sequences = get_sequences(sg, project_id)
