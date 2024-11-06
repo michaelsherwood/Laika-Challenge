@@ -25,9 +25,9 @@ class ShotgridQuery:
             Shotgun: An instance of the Shotgrid API
         """
         # Get Shotgrid credentials from environment variables
-        shotgrid_url = os.getenv("SG_HOST")
-        shotgrid_script_name = os.getenv("SG_SCRIPT_NAME")
-        shotgrid_script_key = os.getenv("SG_SCRIPT_KEY")
+        shotgrid_url = os.getenv("MS_SG_HOST")
+        shotgrid_script_name = os.getenv("MS_SG_SCRIPT_NAME")
+        shotgrid_script_key = os.getenv("MS_SG_SCRIPT_KEY")
 
         # Create a shotgrid connection
         sg = Shotgun(shotgrid_url, shotgrid_script_name, shotgrid_script_key)
